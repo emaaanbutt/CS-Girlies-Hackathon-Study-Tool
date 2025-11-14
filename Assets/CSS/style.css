@@ -1,9 +1,28 @@
 html, body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    letter-spacing:0.2rem;
+}
+
+#body1{
     margin: 0;
     padding: 0;
-    height: 100%;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    letter-spacing: 0.2rem;
+    min-height: 100vh; 
+    background-image: url('../Images/bg.jpg'); 
+    background-size: cover;   
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
+}
+
+#body2 {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; 
+    background-image: url('../Images/main-bg.jpg'); 
+    background-size: cover;   
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
 }
 
 .page{
@@ -68,12 +87,11 @@ p{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    top: -95vh;
 }
 
 #title h1{
     color: rgb(2, 139, 2);
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     transform: translateY(-50px); 
     opacity: 0;                     
     animation: slideDown 1s ease forwards;
@@ -85,5 +103,28 @@ p{
         transform: translateY(0);
         opacity: 1;               
     }
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    background-color: #FFF9C4; /* pastel yellow */
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    padding: 20px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    cursor: pointer;
 }
 
