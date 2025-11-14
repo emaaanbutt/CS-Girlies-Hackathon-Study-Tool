@@ -2,7 +2,8 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-}
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    letter-spacing: 0.2rem;}
 
 #landing-page{
     position: relative;
@@ -28,21 +29,31 @@ html, body {
 }
 
 #button{
-    border: 2px solid rgb(8, 121, 8);
-    width: 50vh;
-    height: 30vh;
+    border: 2px solid rgb(0, 0, 0);
+    width: 30%;
+    height: 35%;
     overflow: hidden;
-    background-color: rgb(97, 180, 97);
+    background-color: rgb(241, 184, 237);;
     border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 0 rgba(0,0,0,0);
 }
 
 #button h1{
+    padding: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 8%;
     flex-direction: column;
     font-size: 2rem;
+    text-wrap: wrap;
+    
+}
+
+#button:hover{
+    cursor: pointer;
+    background-color: rgb(97, 180, 97);
+    box-shadow: 0px 8px 20px rgba(0,0,0,0.25);
 }
 
 
