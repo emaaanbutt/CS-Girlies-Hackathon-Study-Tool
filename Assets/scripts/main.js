@@ -14,4 +14,16 @@ $(document).ready(function() {
     $("#affirmations").on("click", function(){
     window.location.href = "../../Assets/pages/affirmations.html"
     });
+
+    $("#sticky").on("click", function(){
+    window.location.href = "../../Assets/pages/stickynotes.html"
+    });
+
+    $("#flashcards").on("click", function(){
+    window.location.href = "../../Assets/pages/flashcards.html"
+    });
+
+    $("#chatbot").on("click", function(){
+    window.location.href = "../../Assets/pages/chatbot.html"
+    });
 });
