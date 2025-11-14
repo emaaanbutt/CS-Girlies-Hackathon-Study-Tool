@@ -6,4 +6,12 @@ $(document).ready(function() {
     $("#todo").on("click", function(){
     window.location.href = "../../Assets/pages/todo-list.html"
     });
+
+    $("#mood").on("click", function(){
+    window.location.href = "../../Assets/pages/mood-tracker.html"
+    });
+
+    $("#affirmations").on("click", function(){
+    window.location.href = "../../Assets/pages/affirmations.html"
+    });
 });
