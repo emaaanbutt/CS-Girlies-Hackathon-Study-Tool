@@ -3,9 +3,10 @@ html, body {
     padding: 0;
     height: 100%;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    letter-spacing: 0.2rem;}
+    letter-spacing: 0.2rem;
+}
 
-#landing-page{
+.page{
     position: relative;
     height: 100vh;
     width: 100%;
@@ -13,7 +14,7 @@ html, body {
 
 }
 
-#landing-page > img{
+.page > img{
     width: 100%;
     height: 100vh;
     margin: 0;
@@ -25,17 +26,14 @@ html, body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    top: -95vh;
+    top: -60vh;
 }
 
 #button{
-    border: 2px solid rgb(0, 0, 0);
-    width: 30%;
-    height: 35%;
-    overflow: hidden;
-    background-color: rgb(241, 184, 237);;
-    border-radius: 50px;
-    transition: all 0.3s ease;
+    padding: 10px;
+    background-color: white; 
+    transform: rotate(6deg);
+    transition: all 0.4s ease;
     box-shadow: 0 0 0 rgba(0,0,0,0);
 }
 
@@ -47,13 +45,45 @@ html, body {
     flex-direction: column;
     font-size: 2rem;
     text-wrap: wrap;
+    font-size: 1.7rem;
     
+}
+
+p{
+    padding-top: 25px;
+    transform: rotate(6deg);
 }
 
 #button:hover{
     cursor: pointer;
-    background-color: rgb(97, 180, 97);
+    background-color: rgb(248, 201, 46);
     box-shadow: 0px 8px 20px rgba(0,0,0,0.25);
+    color: white;
+    transform: rotate(-6deg);
 }
 
+#dashboard{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    top: -95vh;
+}
+
+#title h1{
+    color: rgb(2, 139, 2);
+    font-size: 2.5rem;
+    transform: translateY(-50px); 
+    opacity: 0;                     
+    animation: slideDown 1s ease forwards;
+    animation-delay: 0.3s;
+}
+
+@keyframes slideDown {
+    to {
+        transform: translateY(0);
+        opacity: 1;               
+    }
+}
 
