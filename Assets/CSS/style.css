@@ -23,7 +23,26 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px solid rgb(8, 121, 8);
     flex-direction: column;
     top: -95vh;
 }
+
+#button{
+    border: 2px solid rgb(8, 121, 8);
+    width: 50vh;
+    height: 30vh;
+    overflow: hidden;
+    background-color: rgb(97, 180, 97);
+    border-radius: 50px;
+}
+
+#button h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 8%;
+    flex-direction: column;
+    font-size: 2rem;
+}
+
+
