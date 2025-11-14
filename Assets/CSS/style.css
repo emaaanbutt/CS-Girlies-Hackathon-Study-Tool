@@ -34,7 +34,7 @@ html, body {
 
 }
 
-#body3{
+.body3{
     background-image: url('../Images/pomodoro.jpg'); 
     background-size: cover;   
     background-position: center; 
