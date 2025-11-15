@@ -258,6 +258,20 @@ p{
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
+.keyboard-hints {
+    border-radius: 12px;
+    text-align: left;
+    margin-top: 10px;
+}
+
+.hint-item {
+    margin: 4px 0;
+    font-size: 0.7rem;
+    color: #7a5d00;
+    padding-top: 0;
+    transform: rotate(0deg);
+}
+
 .todo-container {
     position: absolute;
     top: 15%;
@@ -292,6 +306,41 @@ p{
     outline: none;
 }
 
+.todo-stats {
+    color: #7a5d00;
+    font-size: 0.9rem;
+}
+
+.edit-btn {
+    background: rgb(252, 205, 76);
+    border: none;
+    margin: 10px 5px;
+    color: white;
+    padding: 3px 4px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.edit-btn:hover {
+    background: rgb(255, 170, 0);
+}
+
+.delete-btn {
+    background: rgb(251, 85, 85);
+    border: none;
+    color: white;
+    padding: 3px 4px;
+    margin: 10px 5px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+.delete-btn:hover {
+    background: red;
+}
+
 #add-task-btn {
     padding: 12px;
     border: none;
@@ -311,6 +360,10 @@ p{
     list-style: none;
     padding: 0;
     margin-top: 15px;
+    color: #7a5d00;
+    font-size: 0.7rem;
+    text-align: left;
+
 }
 
 .task-item {
@@ -377,6 +430,14 @@ p{
     box-shadow: 0 5px 15px rgba(0,0,0,0.15);
     border-left: 6px solid rgb(252, 205, 76); /* yellow stripe */
     margin-bottom: 25px;
+}
+
+.affirm-tip {
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 0.7rem;
+    color: #7a5d00;
+    transform: rotate(0deg); 
 }
 
 #new-affirm-btn {
