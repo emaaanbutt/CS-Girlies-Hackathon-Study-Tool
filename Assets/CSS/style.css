@@ -574,6 +574,69 @@ p{
     color: white;
 }
 
+.mood-container {
+    margin-top: 40px;
+    text-align: center;
+    padding: 20px;
+}
+
+.mood-heading {
+    font-size: 28px;
+    color: #8b6a30;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.mood-options {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.mood-card {
+    width: 110px;
+    height: 130px;
+    background: #fffdf7cc;
+    border: 3px dashed #f8c94f;
+    border-radius: 20px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.12);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.mood-card:hover {
+    transform: translateY(-6px) scale(1.05);
+    box-shadow: 0px 6px 20px rgba(248, 201, 79, 0.4);
+}
+
+.mood-icon {
+    font-size: 40px;
+    margin-bottom: 8px;
+}
+
+.mood-result {
+    margin-top: 35px;
+    padding: 20px;
+    height: 120px;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    background: #ffffffcc;
+    border-radius: 20px;
+    border: 3px dashed #f8c94f;
+    font-size: 18px;
+    color: #8b6a30;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
 
 
 
