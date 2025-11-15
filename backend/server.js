@@ -9,7 +9,7 @@ const app = express();
 app.use(cors());
 app.use(express.json()); 
 
-const geminiModel = genAI.getGenerativeModel({ model: "models/text-bison-001" });
+const geminiModel = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
 
 app.post('/flashcards', async (req, res) => {
     try {
