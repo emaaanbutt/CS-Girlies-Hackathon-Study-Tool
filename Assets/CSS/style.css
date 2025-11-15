@@ -333,6 +333,56 @@ p{
     background: red;
 }
 
+.affirm-container {
+    position: absolute;
+    top: 18%;
+    left: 33%;
+    width: 430px;
+    padding: 30px;
+    background: #FFF9C4; /* pastel yellow */
+    border-radius: 20px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.affirm-title {
+    font-size: 2rem;
+    color: rgb(2, 139, 2);
+    margin-bottom: 20px;
+}
+
+.affirm-box {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    font-size: 1.2rem;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #444;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    border-left: 6px solid rgb(252, 205, 76); /* yellow stripe */
+    margin-bottom: 25px;
+}
+
+#new-affirm-btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 12px;
+    background: rgb(252, 205, 76);
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+#new-affirm-btn:hover {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+
 
 
 
