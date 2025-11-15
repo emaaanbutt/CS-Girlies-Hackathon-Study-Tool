@@ -178,5 +178,74 @@ p{
     cursor: pointer;
 }
 
+.pomodoro-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 20%;
+    left: 35%;
+    font-size: 2.2rem;
+    width: 350px;
+    margin: auto;
+    padding: 25px;
+    background: #FFF9C4;
+    border-radius: 20px;
+    box-shadow: 0px 4px 15px rgba(255, 148, 201, 0.3);
+    text-align: center;
+}
+
+.timer-display {
+    margin-bottom: 25px;
+}
+
+#mode-label {
+    font-size: 22px;
+    color: black;
+    margin-bottom: 10px;
+}
+
+#time {
+    font-size: 60px;
+    font-weight: bold;
+    color: rgb(2, 139, 2);
+}
+
+.pomodoro-buttons button {
+    padding: 12px 20px;
+    margin: 8px;
+    border: none;
+    border-radius: 12px;
+    background: rgb(252, 205, 76);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.pomodoro-buttons button:hover {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.session-buttons {
+    margin-top: 20px;
+}
+
+.session-buttons .mode-btn {
+    border: none;
+    padding: 10px 16px;
+    margin: 5px;
+    background: lightgreen;
+    color: black;
+    border-radius: 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.session-buttons .mode-btn:hover {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+
 
 
