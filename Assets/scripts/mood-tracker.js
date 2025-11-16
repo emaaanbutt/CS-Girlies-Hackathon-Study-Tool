@@ -82,7 +82,11 @@ $(document).ready(function () {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+<<<<<<< HEAD
                 "Authorization": "Bearer YOUR_API_KEY_HERE"
+=======
+                "Authorization": "Bearer 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"
+>>>>>>> 549fd01 (Added AI Mood-tracker functionality)
             },
             body: JSON.stringify({
                 model: "llama-3.3-70b-versatile",
