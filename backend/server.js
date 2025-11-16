@@ -1,85 +1,85 @@
-import express from 'express';
-import cors from 'cors';
-import 'dotenv/config';
-import { GoogleGenerativeAI } from '@google/generative-ai'; 
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import { GoogleGenAI } from "@google/genai";
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+dotenv.config();
+
 const app = express();
-
 app.use(cors());
-app.use(express.json()); 
+app.use(express.json());
 
-const geminiModel = genAI.getGenerativeModel({ model: "models/text-bison-001" });
+const API_KEY = process.env.GEMINI_API_KEY || "YOUR_API_KEY_HERE";
 
-app.post('/flashcards', async (req, res) => {
-    try {
-        const { topic } = req.body;
+const ai = new GoogleGenAI({ apiKey: API_KEY, vertexai: false });
 
-        if (!topic) {
-            return res.status(400).json({ error: 'Topic is required' });
-        }
+app.post("/flashcards", async (req, res) => {
+  try {
+    const { topic } = req.body;
+    if (!topic) return res.status(400).json({ error: "Topic is required" });
 
-        const prompt = `
-            Generate 5 high-quality flashcards for the topic: "${topic}".
-            Return the response as *only* a valid JSON array, with each object
-            containing a "q" (question) and an "a" (answer) key.
-            Do not include any other text or markdown.
+    const prompt = `
+      Generate exactly 5 flashcards for the topic: "${topic}".
+      Respond ONLY with a valid JSON array.
+      Each item must contain: { "q": "question", "a": "answer" }
+    `;
 
-            Example:
-            [
-              {"q": "What is 2+2?", "a": "4"},
-              {"q": "What is the capital of France?", "a": "Paris"}
-            ]
-        `;
-        
-        const result = await geminiModel.generateContent(prompt);
-        
-        const response = await result.response;
-        const text = response.text();
-        
+    const result = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: prompt,
+    });
 
-        const cleanedJson = text.replace('```json', '').replace('```', '').trim();
-        const flashcards = JSON.parse(cleanedJson); 
-        
-        res.json(flashcards);
+    const text = result.text;
+    const cleaned = text.replace(/```json/g, "").replace(/```/g, "").trim();
+    const flashcards = JSON.parse(cleaned);
 
-    } catch (error) {
-        console.error("Error in /flashcards route:", error);
-        res.status(500).json({ error: 'Failed to generate flashcards' });
-    }
+    res.json(flashcards);
+  } catch (error) {
+    console.error("Error in /flashcards:", error);
+    res.status(500).json({ error: "Failed to generate flashcards", details: error.message });
+  }
 });
 
-app.post('/plan', async (req, res) => {
-    try {
-        const { hours, difficulty } = req.body;
+app.post("/plan", async (req, res) => {
+  try {
+    const { hours, difficulty } = req.body;
+    if (!hours || !difficulty)
+      return res.status(400).json({ error: "Hours and difficulty are required" });
 
-        if (!hours || !difficulty) {
-            return res.status(400).json({ error: 'Hours and difficulty are required' });
-        }
+    const prompt = `
+      Create a clear study plan for a student with ${hours} hours
+      preparing for a test of ${difficulty} difficulty.
+      Use Pomodoro blocks: 25 minutes study + 5 minutes break.
+      Keep it encouraging and structured.
+    `;
 
-        const prompt = `
-            Create a study plan for a student who has ${hours} hours to study
-            for a test of ${difficulty} difficulty.
-            Break down the plan into a list of tasks and study blocks.
-            Each study block should be a 25-minute "Pomodoro" session,
-            followed by a 5-minute break.
-            Be encouraging and clear.
-        `;
+    const result = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: prompt,
+    });
 
-        const result = await geminiModel.generateContent(prompt);
+    res.json({ plan: result.text });
+  } catch (error) {
+    console.error("Error in /plan:", error);
+    res.status(500).json({ error: "Failed to generate study plan", details: error.message });
+  }
+});
 
-        const response = await result.response;
-        const studyPlan = response.text();
-        
-        res.json({ plan: studyPlan });
+app.get("/test-gemini", async (req, res) => {
+  try {
+    const result = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: "Say 'Gemini is working!' in a creative way",
+    });
 
-    } catch (error) {
-        console.error("Error in /plan route:", error);
-        res.status(500).json({ error: 'Failed to generate study plan' });
-    }
+    res.json({ success: true, response: result.text });
+  } catch (error) {
+    console.error("Gemini test error:", error);
+    res.status(500).json({ success: false, error: error.message });
+  }
 });
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
