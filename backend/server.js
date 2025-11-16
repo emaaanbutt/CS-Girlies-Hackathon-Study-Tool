@@ -37,6 +37,7 @@ app.post("/flashcards", async (req, res) => {
       Generate exactly 5 flashcards for the topic: "${topic}".
       Respond ONLY with a valid JSON array.
       Each item must contain: { "q": "question", "a": "answer" }
+      Tne answer should be in one line of 12 - 16 words.
     `;
 
     const result = await ai.models.generateContent({
