@@ -491,6 +491,7 @@ p{
     background: rgb(252, 205, 76);
     color: white;
     font-size: 1rem;
+    font-weight: bold;
     cursor: pointer;
     transition: 0.3s ease;
 }
@@ -549,6 +550,32 @@ p{
 .note-btn:hover {
     color: red;
 }
+
+.color-picker-popup {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 10px;
+    border: 2px solid rgb(252, 205, 76);
+}
+
+.color-option {
+    width: 40px;  
+    height: 40px; 
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.color-option:hover {
+    transform: scale(1.15);
+    border-color: #333;
+}
+
 #mini-chatbot {
     width: 380px;
     height: 550px;
