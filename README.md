@@ -44,6 +44,7 @@ Here are some screenshots of Study Buddy in action:
   <img src="Assets/Images/Screenshots/ss2.png" alt="ss2" style="height: 300px; object-fit: cover;"/>
   <img src="Assets/Images/Screenshots/ss3.png" alt="ss3" style="height: 300px; object-fit: cover;"/>
   <img src="Assets/Images/Screenshots/ss4.png" alt="ss4" style="height: 300px; object-fit: cover;"/>
+  <img src="Assets/Images/Screenshots/ss7.png" alt="ss4" style="height: 300px; object-fit: cover;"/>
 </div>
 
 
