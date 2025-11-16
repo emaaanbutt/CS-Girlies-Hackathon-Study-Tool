@@ -1,23 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-R-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flashcards</title>
-    <link rel="stylesheet" href="../CSS/style.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="../scripts/flashcards.js"></script>
+    <title>AI Flashcards</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #fef3c7; /* Light yellow */
+            background-image: linear-gradient(to right, rgba(253, 224, 71, 0.5) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(253, 224, 71, 0.5) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        /* Custom font */
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&display=swap');
+        body, .font-fredoka {
+            font-family: 'Fredoka', sans-serif;
+        }
 
+        /* 3D card perspective for flipping */
+        .scene {
+            perspective: 1000px;
+        }
+        
+        /* Card flip animation */
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        
+        .card.is-flipped {
+            transform: rotateY(180deg);
+        }
+        
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            border-radius: 1rem;
+        }
+        
+        .card-front {
+            background-color: white;
+            color: #d97706; /* Amber-700 */
+        }
+        
+        .card-back {
+            background-color: #f59e0b; /* Amber-500 */
+            color: white;
+            transform: rotateY(180deg);
+        }
+    </style>
 </head>
-<body>
-    <div class="body3">
-        <div id="flashcards-page">
-            <div class="back-btn">
-                Back
-            </div>
+<body class="font-fredoka min-h-screen flex items-center justify-center p-4">
+
+    <div class="w-full max-w-md bg-white/70 backdrop-blur-sm p-8 rounded-2xl shadow-xl">
+        
+        <a href="main.html" class="text-amber-600 hover:text-amber-800 transition-colors">&larr; Back to Dashboard</a>
+
+        <h1 class="text-3xl font-semibold text-center text-amber-800 mt-4">AI Flashcards</h1>
+        
+        <div class="mt-6">
+            <label for="topic" class="block text-sm font-medium text-amber-700">Enter a Topic:</label>
+            <input type="text" id="topic" class="mt-1 block w-full px-4 py-2 bg-white rounded-lg border border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-500" placeholder="e.g., JavaScript Promises">
+        </div>
+
+        <button id="generate-btn" class="mt-6 w-full bg-amber-500 text-white py-3 rounded-lg font-semibold shadow-md hover:bg-amber-600 transition-all focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2">
+            Generate Cards
+        </button>
+
+        <div id="message-area" class="mt-4 text-center text-amber-600"></div>
+
+        <div id="flashcard-container" class="mt-8">
         </div>
 
     </div>
-    
+
+    <script>
+        const generateBtn = document.getElementById('generate-btn');
+        const topicInput = document.getElementById('topic');
+        const cardContainer = document.getElementById('flashcard-container');
+        const messageArea = document.getElementById('message-area');
+
+        const API_URL = 'http://localhost:3000/flashcards';
+
+        generateBtn.addEventListener('click', async () => {
+            const topic = topicInput.value;
+
+            if (!topic) {
+                messageArea.textContent = 'Please enter a topic!';
+                return;
+            }
+
+            messageArea.textContent = 'Generating your cards... ✨';
+            generateBtn.disabled = true;
+            generateBtn.textContent = 'Generating...';
+            cardContainer.innerHTML = ''; // Clear old cards
+
+            try {
+                // 2. Call your backend API (This is the integration part)
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ topic: topic })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Something went wrong on the server.');
+                }
+
+                const flashcards = await response.json();
+
+                messageArea.textContent = ''; // Clear loading message
+                displayFlashcards(flashcards);
+
+            } catch (error) {
+                console.error('Fetch error:', error);
+                messageArea.textContent = 'Oops! Failed to get cards. Please try again.';
+            } finally {
+                generateBtn.disabled = false;
+                generateBtn.textContent = 'Generate Cards';
+            }
+        });
+
+        function displayFlashcards(flashcards) {
+            let currentCardIndex = 0;
+
+            function renderCard() {
+                if (currentCardIndex >= flashcards.length) {
+                    cardContainer.innerHTML = '<p class="text-center text-green-600 font-semibold">All done! 🎉</p>';
+                    return;
+                }
+
+                const cardData = flashcards[currentCardIndex];
+                
+                cardContainer.innerHTML = `
+                    <p class="text-center text-sm text-amber-600 mb-2">Card ${currentCardIndex + 1} of ${flashcards.length}</p>
+                    <div class="scene w-full h-48">
+                        <div class="card">
+                            <div class="card-face card-front">
+                                <p class="text-xl font-semibold">${cardData.q}</p>
+                            </div>
+                            <div class="card-face card-back">
+                                <p class="text-lg">${cardData.a}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between mt-4">
+                        <button id="prev-btn" class="py-2 px-4 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">&larr; Prev</button>
+                        <button id="next-btn" class="py-2 px-4 bg-amber-500 text-white rounded-lg hover:bg-amber-600">Next &rarr;</button>
+                    </div>
+                `;
+
+                const card = cardContainer.querySelector('.card');
+                
+                card.addEventListener('click', () => {
+                    card.classList.toggle('is-flipped');
+                });
+
+                document.getElementById('next-btn').addEventListener('click', () => {
+                    currentCardIndex++;
+                    renderCard();
+                });
+
+                document.getElementById('prev-btn').addEventListener('click', () => {
+                    if (currentCardIndex > 0) {
+                        currentCardIndex--;
+                        renderCard();
+                    }
+                });
+
+                if (currentCardIndex === 0) {
+                    document.getElementById('prev-btn').disabled = true;
+                    document.getElementById('prev-btn').classList.add('opacity-50', 'cursor-not-allowed');
+                }
+            }
+
+            renderCard();
+        }
+
+    </script>
 </body>
 </html>
