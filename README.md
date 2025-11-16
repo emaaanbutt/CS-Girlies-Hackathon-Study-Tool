@@ -13,10 +13,9 @@
 5. [Tech Stack](#tech-stack)  
 6. [Installation](#installation)  
 7. [Usage](#usage)  
-8. [Special Commands](#special-commands)  
-9. [AI Integrations](#ai-integrations)  
-10. [Deployment](#deployment)  
-11. [License](#license)  
+8. [AI Integrations](#ai-integrations)  
+9. [Deployment](#deployment)  
+10. [License](#license)  
 
 ---
 
@@ -141,12 +140,12 @@ http://localhost:3000
 ```
 3. Use the dashboard:
 
--Start Pomodoro sessions
--Add tasks in To-do list
--Track mood and get AI study suggestions
--Use AI flashcards
--Chat with the AI bot
--Drag sticky notes around 
+- Start Pomodoro sessions
+- Add tasks in To-do list
+- Track mood and get AI study suggestions
+- Use AI flashcards
+- Chat with the AI bot
+- Drag sticky notes around 
 
 ## AI Integrations
 
@@ -157,7 +156,7 @@ http://localhost:3000
 
 - **Hosted on GitHub Pages:** [link-to-your-hosted-dashboard]  
 - **Backend:** Runs on local Node.js server.
--  
+  
 ## License
 
 This project is licensed under the MIT License.
