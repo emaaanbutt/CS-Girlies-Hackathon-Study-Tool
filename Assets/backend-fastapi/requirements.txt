@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+python-dotenv
+langchain
+langchain-openai
+langchain-community
+langchain-google-genai
+faiss-cpu
+pypdf
+unstructured
+beautifulsoup4
+requests
