@@ -1,32 +1,14 @@
-$(document).ready(function() {
-    $(".back-btn").on("click", function(){
-    window.location.href = "../../Assets/pages/main.html"
-    });
-});
-
-// $(document).ready(function () {
-
-//     const plans = {
-//         happy: "You're full of energy! Try a 40-minute focused study session + 10-minute break ✨",
-//         sad: "Go slow today 💛 Do a 20-minute light review and then rest.",
-//         sleepy: "You need a recharge 😴 Take a 15-min nap first, then a short 25-minute session.",
-//         stressed: "Deep breath! 🌿 Try the Pomodoro: 25 minutes study + 5 minutes calm music.",
-//         neutral: "A balanced day! Start with your easiest task for momentum ⚡"
-//     };
-
-//     $(".mood-card").click(function () {
-//         let mood = $(this).data("mood");
-//         $("#mood-result").html(plans[mood]);
-//     });
-
-// });
-
 $(document).ready(function () {
+
+    // Back button navigation
+    $(".back-btn").on("click", function(){
+        window.location.href = "../../Assets/pages/main.html"
+    });
 
     // Load mood history from localStorage
     let moodHistory = JSON.parse(localStorage.getItem('moodHistory')) || [];
 
-    // Default study plans for each mood
+    // Default study plans for each mood (FALLBACK)
     const plans = {
         happy: "You're full of energy! Try a 40-minute focused study session + 10-minute break ✨",
         sad: "Go slow today 💛 Do a 20-minute light review and then rest.",
@@ -35,14 +17,103 @@ $(document).ready(function () {
         neutral: "A balanced day! Start with your easiest task for momentum ⚡"
     };
 
-    // AI prompts for each mood
-    const aiPrompts = {
-        happy: "The user is feeling happy and energetic today. Provide a warm, motivating study plan that capitalizes on their positive energy. Include 2-3 actionable study tips and encouragement. Keep it under 120 words.",
-        sad: "The user is feeling sad today. Provide a gentle, compassionate study plan with light, manageable goals. Focus on self-care and small wins. Be comforting and supportive. Keep it under 120 words.",
-        sleepy: "The user is feeling sleepy and low-energy today. Provide an energizing study plan with movement breaks, hydration tips, and short focused sessions. Keep it under 120 words.",
-        stressed: "The user is feeling stressed and overwhelmed. Provide a calming study plan with stress-relief techniques, breathing exercises, and prioritization tips. Be soothing and organized. Keep it under 120 words.",
-        neutral: "The user is feeling okay/neutral today. Provide a balanced, productive study plan with a good mix of tasks and breaks. Include efficiency tips. Keep it under 120 words."
-    };
+    // Get AI response from YOUR backend server
+    async function getAIResponse(mood) {
+        const $resultDiv = $('#mood-result');
+        
+        // This is the URL of your local server
+        const API_URL = 'http://localhost:3000/moodtracker'; 
+    
+        // Show loading spinner and default plan
+        $resultDiv.html(`
+            <div style="text-align: center;">
+                <div style="font-size: 14px; margin-bottom: 10px;">🤔 AI is thinking...</div>
+                <div style="font-size: 14px; color: #7a5d00; margin-top: 10px;">
+                    ${plans[mood]}
+                </div>
+            </div>
+        `);
+
+        try {
+            // This now calls YOUR server
+            const response = await fetch(API_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    mood: mood // Send the mood to your API
+                })
+            });
+
+            if (!response.ok) {
+                // If your server has an error, this will catch it
+                throw new Error('Server returned an error');
+            }
+
+            const data = await response.json();
+            const aiMessage = data.plan; // Get the 'plan' from your server's response
+
+            // Mood emojis
+            const moodEmojis = {
+                happy: "😊",
+                sad: "😔",
+                sleepy: "😴",
+                stressed: "😫",
+                neutral: "🙂"
+            };
+
+            $resultDiv.css({
+                'background-color': 'rgba(255, 255, 255, 0.8)', 
+                'backdrop-filter': 'blur(5px)', 
+                'padding': '20px',
+                'border-radius': '15px',
+                'margin-top': '25px',
+                'box-shadow': '0 4px 15px rgba(0,0,0,0.1)'
+            });
+
+            // Display AI response
+            $resultDiv.html(`
+                <div style="text-align: left;">
+                    <div style="font-size: 24px; text-align: center; margin-bottom: 12px;">
+                        ${moodEmojis[mood]} AI Personalized Plan
+                    </div>
+                    <!-- Added pre-wrap to respect newlines from the AI -->
+                    <div style="line-height: 1.7; white-space: pre-wrap; font-size: 11px">${aiMessage}</div>
+                    <div style="margin-top: 8px; padding-top: 0px; font-size: 0.85rem; color: #7a5d00;">
+                        💡Your mood has been saved to history!
+                    </div>
+                </div>
+            `);
+
+            console.log("AI response received from your server!");
+
+        } catch (error) {
+            console.error("AI Error:", error);
+    
+            $resultDiv.css({
+                'background-color': 'rgba(255, 255, 255, 0.8)',
+                'backdrop-filter': 'blur(5px)',
+                'padding': '20px',
+                'border-radius': '15px',
+                'margin-top': '25px',
+                'box-shadow': '0 4px 15px rgba(0,0,0,0.1)'
+            });
+
+            // Fallback to default plan
+            $resultDiv.html(`
+                <div style="text-align: center;">
+                    <div style="font-size: 24px; margin-bottom: 10px;">📝</div>
+                    <div style="line-height: 1.6;">
+                        ${plans[mood]}
+                    </div>
+                    <div style="margin-top: 15px; font-size: 0.85rem; color: #999;">
+                        (AI unavailable - showing default plan)
+                    </div>
+                </div>
+            `);
+        }
+    }
 
     // Save mood to history
     function saveMoodToHistory(mood) {
@@ -63,6 +134,7 @@ $(document).ready(function () {
         console.log(`Mood saved: ${mood} (Total: ${moodHistory.length} entries)`);
     }
 
+<<<<<<< HEAD
     // Get AI response using FREE Groq API
     async function getAIResponse(mood) {
         const $resultDiv = $('#mood-result');
@@ -151,6 +223,8 @@ $(document).ready(function () {
         }
     }
 
+=======
+>>>>>>> 55f2450 (Modified)
     // Calculate mood statistics
     function getMoodStats() {
         if (moodHistory.length === 0) {
@@ -181,7 +255,6 @@ $(document).ready(function () {
     function showMoodHistory() {
         const stats = getMoodStats();
         
-
         if (stats.total === 0) {
             $('#mood-history-content').html(`
                 <div style="text-align: center; padding: 40px 20px;">
@@ -266,7 +339,7 @@ $(document).ready(function () {
 
         recentEntries.forEach(entry => {
             historyHTML += `
-                <div style="display: flex; justify-content: space-between; align-items: center; margin: 8px 0; padding: 8px 12px; background: rgba(255,255,255,0.5); border-radius: 8px; border-left: 3px solid ${moodColors[entry.mood]};">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin: 8px 0; padding: 8px 12px; background: rgba(255,255,0.5); border-radius: 8px; border-left: 3px solid ${moodColors[entry.mood]};">
                     <span style="font-size: 1.2rem;">${moodEmojis[entry.mood]}</span>
                     <span style="font-size: 0.85rem; color: #7a5d00; text-transform: capitalize;">${entry.mood}</span>
                     <span style="font-size: 0.8rem; color: #999;">${entry.dateString}</span>
@@ -278,7 +351,6 @@ $(document).ready(function () {
         
         $('#mood-history-content').html(historyHTML);
         $('#mood-history-modal').css('display', 'flex');
-
     }
 
     // Mood card click handler
