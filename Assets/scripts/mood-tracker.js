@@ -77,10 +77,10 @@ $(document).ready(function () {
             </div>
         `);
 
-    try {
-        const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+        const response = await fetch("/api/mood", {
             method: "POST",
             headers: {
+<<<<<<< HEAD
                 "Content-Type": "application/json",
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -96,19 +96,16 @@ $(document).ready(function () {
                 "const GROQ_API_KEY" : "process.env.GROQ_KEY"
 
 >>>>>>> 069dee5 (Clean commit)
+=======
+                "Content-Type": "application/json"
+>>>>>>> cf1f47d (Added)
             },
             body: JSON.stringify({
-                model: "llama-3.3-70b-versatile",
-                messages: [
-                    { 
-                        role: "user", 
-                        content: aiPrompts[mood]
-                    }
-                ],
-                max_tokens: 100
+                mood: mood,
+                prompt: aiPrompts[mood]
             })
         });
-
+        try {
             const data = await response.json();
             const aiMessage = data.choices[0].message.content; //extract AI message
 
