@@ -3,6 +3,14 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { GoogleGenAI } from "@google/genai";
 
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+
+
 dotenv.config();
 
 const app = express();
@@ -12,6 +20,13 @@ app.use(express.json());
 const API_KEY = process.env.GEMINI_API_KEY || "YOUR_API_KEY_HERE";
 
 const ai = new GoogleGenAI({ apiKey: API_KEY, vertexai: false });
+
+app.use('/assets', express.static('../Assets'));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../index.html'));
+});
+
 
 app.post("/flashcards", async (req, res) => {
   try {
