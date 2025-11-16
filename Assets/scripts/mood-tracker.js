@@ -84,6 +84,7 @@ $(document).ready(function () {
                 "Content-Type": "application/json",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 "Authorization": "Bearer YOUR_API_KEY_HERE"
 =======
                 "Authorization": "Bearer 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"
@@ -91,6 +92,10 @@ $(document).ready(function () {
 =======
                 "Authorization": "Bearer YOUR_API_KEY_HERE"
 >>>>>>> fa1a993 (AI Mood-tracker)
+=======
+                "const GROQ_API_KEY" : "process.env.GROQ_KEY"
+
+>>>>>>> 069dee5 (Clean commit)
             },
             body: JSON.stringify({
                 model: "llama-3.3-70b-versatile",
