@@ -57,6 +57,51 @@
         </div>
 
     </div>
+
+    <div id="mood-history-modal" style="
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.6);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+    ">
+        <div style="
+            background: #FFF9C4;
+            width: 90%;
+            max-width: 650px;
+            max-height: 85vh;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0px 10px 40px rgba(0,0,0,0.4);
+            position: relative;
+            overflow-y: auto;
+        ">
+            <button id="close-modal-btn" style="
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                background: rgb(251, 85, 85);
+                border: none;
+                color: white;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                font-size: 1.3rem;
+                cursor: pointer;
+                transition: 0.2s;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            " onmouseover="this.style.background='rgb(220, 60, 60)'" onmouseout="this.style.background='rgb(251, 85, 85)'">✕</button>
+            
+            <div id="mood-history-content">
+                <!-- History content will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </div>
     
 </body>
 </html>
