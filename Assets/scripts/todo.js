@@ -3,3 +3,4 @@ $(document).ready(function() {
     window.location.href = "../../Assets/pages/main.html"
     });
 });
+                                               
