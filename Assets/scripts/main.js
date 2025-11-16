@@ -26,4 +26,8 @@ $(document).ready(function() {
     $("#chatbot").on("click", function(){
     window.location.href = "../../Assets/pages/chatbot.html"
     });
+
+    $("#devs").on("click", function(){
+    window.location.href = "../../Assets/pages/devs.html"
+    });
 });
