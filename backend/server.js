@@ -40,30 +40,42 @@ app.post("/flashcards", async (req, res) => {
   }
 });
 
-app.post("/plan", async (req, res) => {
-  try {
-    const { hours, difficulty } = req.body;
-    if (!hours || !difficulty)
-      return res.status(400).json({ error: "Hours and difficulty are required" });
+app.post("/moodtracker", async (req, res) => {
+    try {
+    const { mood } = req.body;
+    if (!mood)
+      return res.status(400).json({ error: "Mood is required" });
 
+    // This is the new, more detailed prompt
     const prompt = `
-      Create a clear study plan for a student with ${hours} hours
-      preparing for a test of ${difficulty} difficulty.
-      Use Pomodoro blocks: 25 minutes study + 5 minutes break.
-      Keep it encouraging and structured.
-    `;
+      You are an expert, empathetic, and encouraging study coach.
+      A student needs a study plan. Their current mood is "${mood}".
 
-    const result = await ai.models.generateContent({
+      Please generate a clear, actionable study plan that is *specifically adapted* to their mood.
+      
+      **Rules for the plan:**
+      1.  **Mood Adaptation:**
+          * If the mood is "Stressed", "Tired", or "Sad", make the plan very gentle. Start with an easy win (like "Organize notes" or "Review 1 concept") and include more breaks.
+          * If the mood is "Happy", "Focused", or "Okay", you can create a more ambitious plan that tackles harder parts of the topic first.
+      2.  **Technique:** The plan *must* be built around Pomodoro blocks (25 minutes of study, 5 minutes of break).
+      3.  **Length:** The plan must be a concise list of 2-3 steps. Each line should consist of 10 words maximum.
+      4.  **Tone:** Be very encouraging! Start with a kind, positive sentence that acknowledges their mood.
+
+      Generate the study plan now, formatted as simple text.
+    `;
+      const result = await ai.models.generateContent({
       model: "gemini-2.5-flash",
       contents: prompt,
-    });
+     });
 
-    res.json({ plan: result.text });
-  } catch (error) {
-    console.error("Error in /plan:", error);
+    res.json({ plan: result.text }); // Send the plan back
+
+   }catch (error) {
+    console.error("Error in /moodtracker route:", error);
     res.status(500).json({ error: "Failed to generate study plan", details: error.message });
-  }
+ }
 });
+
 
 app.get("/test-gemini", async (req, res) => {
   try {
