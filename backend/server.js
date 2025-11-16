@@ -17,7 +17,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const API_KEY = process.env.GEMINI_API_KEY || "YOUR_API_KEY_HERE";
+const API_KEY = process.env.GEMINI_API_KEY || "AIzaSyCl56zBuLOYvNsNYNQDJRcucOGkNApLsXE";
 
 const ai = new GoogleGenAI({ apiKey: API_KEY, vertexai: false });
 
