@@ -35,6 +35,18 @@ The goal is to make student life less stressful and more productive, all in a cu
 
 ---
 
+## SCREENSHOTS
+
+Here are some screenshots of Study Buddy in action:
+
+<div style="display: flex; gap: 10px; flex-wrap: nowrap; overflow-x: auto; align-items: stretch;">
+  <img src="Assets/Images/Screenshots/ss1.png" alt="ss1" style="height: 300px; object-fit: cover;"/>
+  <img src="Assets/Images/Screenshots/ss2.png" alt="ss2" style="height: 300px; object-fit: cover;"/>
+  <img src="Assets/Images/Screenshots/ss3.png" alt="ss3" style="height: 300px; object-fit: cover;"/>
+  <img src="Assets/Images/Screenshots/ss4.png" alt="ss4" style="height: 300px; object-fit: cover;"/>
+</div>
+
+
 ## HACKATHON TRACK
 
 **Track:** Automate Learning: Build Smarter Study Tools  
