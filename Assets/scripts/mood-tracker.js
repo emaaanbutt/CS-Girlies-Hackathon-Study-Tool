@@ -63,6 +63,7 @@ $(document).ready(function () {
                 neutral: "🙂"
             };
 
+        
             $resultDiv.css({
                 'background-color': 'rgba(255, 255, 255, 0.8)', 
                 'backdrop-filter': 'blur(5px)', 
@@ -134,97 +135,6 @@ $(document).ready(function () {
         console.log(`Mood saved: ${mood} (Total: ${moodHistory.length} entries)`);
     }
 
-<<<<<<< HEAD
-    // Get AI response using FREE Groq API
-    async function getAIResponse(mood) {
-        const $resultDiv = $('#mood-result');
-    
-    // Show loading
-        $resultDiv.html(`
-            <div style="text-align: center;">
-                <div style="font-size: 14px; margin-bottom: 10px;">🤔 AI is thinking...</div>
-                <div style="font-size: 14px; color: #7a5d00; margin-top: 10px;">
-                    ${plans[mood]}
-                </div>
-            </div>
-        `);
-
-        const response = await fetch("/api/mood", {
-            method: "POST",
-            headers: {
-<<<<<<< HEAD
-                "Content-Type": "application/json",
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                "Authorization": "Bearer YOUR_API_KEY_HERE"
-=======
-                "Authorization": "Bearer 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"
->>>>>>> 549fd01 (Added AI Mood-tracker functionality)
-=======
-                "Authorization": "Bearer YOUR_API_KEY_HERE"
->>>>>>> fa1a993 (AI Mood-tracker)
-=======
-                "const GROQ_API_KEY" : "process.env.GROQ_KEY"
-
->>>>>>> 069dee5 (Clean commit)
-=======
-                "Content-Type": "application/json"
->>>>>>> cf1f47d (Added)
-            },
-            body: JSON.stringify({
-                mood: mood,
-                prompt: aiPrompts[mood]
-            })
-        });
-        try {
-            const data = await response.json();
-            const aiMessage = data.choices[0].message.content; //extract AI message
-
-            // Mood emojis
-            const moodEmojis = {
-                happy: "😊",
-                sad: "😔",
-                sleepy: "😴",
-                stressed: "😫",
-                neutral: "🙂"
-            };
-
-            // Display AI response
-            $resultDiv.html(`
-                <div style="text-align: left;">
-                    <div style="font-size: 24px; text-align: center; margin-bottom: 12px;">
-                        ${moodEmojis[mood]} AI Personalized Plan
-                    </div>
-                    <div style="line-height: 1.7; white-space: pre-wrap; font-size: 11px">${aiMessage}</div>
-                    <div style="margin-top: 8px; padding-top: 0px; font-size: 0.85rem; color: #7a5d00;">
-                        💡Your mood has been saved to history!
-                    </div>
-                </div>
-            `);
-
-            console.log("AI response received!");
-
-        } catch (error) {
-            console.error("AI Error:", error);
-            
-            // Fallback to default plan
-            $resultDiv.html(`
-                <div style="text-align: center;">
-                    <div style="font-size: 24px; margin-bottom: 10px;">📝</div>
-                    <div style="line-height: 1.6;">
-                        ${plans[mood]}
-                    </div>
-                    <div style="margin-top: 15px; font-size: 0.85rem; color: #999;">
-                        (AI unavailable - showing default plan)
-                    </div>
-                </div>
-            `);
-        }
-    }
-
-=======
->>>>>>> 55f2450 (Modified)
     // Calculate mood statistics
     function getMoodStats() {
         if (moodHistory.length === 0) {
